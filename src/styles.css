@@ -13,7 +13,6 @@ body {
   --accent-color: #e8e7fa;
   --shadow-color: #E8E8E8;
 }
-
 button.primary {
   padding: 10px;
   border: solid 1px var(--primary-color);
