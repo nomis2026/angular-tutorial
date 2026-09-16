@@ -13,12 +13,13 @@ import { HousingLocationInfo } from '../housinglocation';
       </form>
     </section>
     <section class="results">
-      <app-housing-location />
+      <app-housing-location [housingLocation]="housingLocation" />
     </section>
   `,
   styleUrl: './home.css',
 })
-export class Home {readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
+export class Home {
+  readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
   housingLocation: HousingLocationInfo = {
     id: 9999,
     name: 'Test Home',
