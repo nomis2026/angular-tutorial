@@ -70,3 +70,14 @@ input {
     height: 400px;
   }
 }
+.not-found {
+  padding: 2rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  text-align: center;
+}
+.listing-not-found,
+.listing-loading {
+  padding: 2rem;
+  text-align: center;
+}
