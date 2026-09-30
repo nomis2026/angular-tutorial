@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Housing } from '../housing';
 import { HousingLocationInfo } from '../housinglocation';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -64,7 +64,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
               <label for="email">Email</label>
               <input id="email" type="email" formControlName="email" />
-              <button type="submit" class="primary">Apply now</button>
+              <button type="submit" class="primary" [disabled]="applyForm.invalid">
+                Apply now
+              </button>
             </form>
           </section>
         }
@@ -80,9 +82,9 @@ export class Details {
   isLoading = true;
 
   applyForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
@@ -110,6 +112,9 @@ export class Details {
   }
 
   submitApplication() {
+    if (this.applyForm.invalid) {
+      return;
+    }
     this.housingService.submitApplication(
       this.applyForm.value.firstName ?? '',
       this.applyForm.value.lastName ?? '',
